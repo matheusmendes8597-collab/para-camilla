@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Camilla ❤️</title>
+<style>
+  body {
+    background-color: rgb(255, 255, 255);
+    margin: 0;
+    padding: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+  .painel {
+    margin: auto;
+    background-color: white;
+    width: 500px;
+    border-radius: 20px;
+    text-align: center;
+    padding: 50px 20px 20px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .painel img {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    height: auto;
+  }
+
+  #sim {
+    height: 40px;
+    width: 60px;
+    background-color: #ff0000;
+    border: 2px solid white;
+    border-radius: 10px;
+    color: white;
+    margin-left: -50px;
+    cursor: pointer;
+  }
+
+  #nao {
+    position: absolute;
+    height: 40px;
+    width: 60px;
+    background-color: rgb(255, 0, 0);
+    border: 2px solid white;
+    border-radius: 10px;
+    color: white;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  h1 {
+    margin: 10px 0;
+  }
+
+  h2 {
+    margin: 10px 20px;
+  }
+
+  /* RESPONSIVO PARA MOBILE */
+  @media (max-width: 600px) {
+    .painel {
+      width: 90%;
+      padding-top: 20px;
+    }
+
+    h1 {
+      font-size: 20px;
+    }
+
+    h2 {
+      font-size: 16px;
+    }
+
+    #sim, #nao {
+      height: 35px;
+      width: 50px;
+      font-size: 14px;
+    }
+
+    .painel img {
+      max-width: 80%;
+      height: auto;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="painel">
+  <h1>Camilla 🥰😍</h1>
+  <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTQzejZ1MzR0eDZmeXdkeTZyOXF6eW1reWluNGRrbXVkdHkyb3Z4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RGue8n5u0Ky5lrdWsy/giphy.gif" alt="">
+  <img src="https://gifman.net/wp-content/uploads/2019/06/ursinho-fofo-apaixonado.gif" alt="">
+  <h2> Me sinto tão sortudo por ter você na minha vida... Te amo hoje, amanhã e sempre! Fica comigo a vida inteira? </h2>
+  
+  <a href="https://www.youtube.com/watch?v=oRvND-r57Us">
+    <button id="sim">Sim!</button>
+  </a>
+  <button onmouseover="fuja()" id="nao">Não!</button>
+</div>
+
+<script>
+function fuja() {
+  var botaoNao = document.getElementById("nao");
+  var larguraJanela = window.innerWidth;
+  var alturaJanela = window.innerHeight;
+
+  // Limitar para que o botão nunca ultrapasse a tela
+  var maxX = larguraJanela - botaoNao.offsetWidth - 10;
+  var maxY = alturaJanela - botaoNao.offsetHeight - 10;
+
+  // Garante que o botão não ultrapasse o painel
+  var painel = document.querySelector('.painel');
+  if (painel) {
+    var painelRect = painel.getBoundingClientRect();
+    maxX = Math.min(maxX, painelRect.right - botaoNao.offsetWidth);
+    maxY = Math.min(maxY, painelRect.bottom - botaoNao.offsetHeight);
+  }
+
+  var aleatorioX = Math.floor(Math.random() * maxX);
+  var aleatorioY = Math.floor(Math.random() * maxY);
+
+  botaoNao.style.left = aleatorioX + "px";
+  botaoNao.style.top = aleatorioY + "px";
+}
+</script>
+
+</body>
+</html>
