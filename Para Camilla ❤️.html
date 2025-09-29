@@ -52,6 +52,8 @@
       color: white;
       margin-left: 10px;
       cursor: pointer;
+      left: 10px; /* posição inicial */
+      top: 100px; /* posição inicial */
     }
 
     h1 {
@@ -84,6 +86,13 @@
         height: auto;
       }
     }
+
+    /* Ajustes específicos para PC */
+    @media (min-width: 601px) {
+      #nao {
+        margin-left: 0; /* remove o margin que atrapalha no desktop */
+      }
+    }
   </style>
 </head>
 <body>
@@ -101,28 +110,25 @@
   <script>
     function fuja() {
       var botaoNao = document.getElementById("nao");
-      var larguraJanela = window.innerWidth;
-      var alturaJanela = window.innerHeight;
-
-      // Limitar para que o botão nunca ultrapasse a tela
-      var maxX = larguraJanela - botaoNao.offsetWidth - 10;
-      var maxY = alturaJanela - botaoNao.offsetHeight - 10;
-
-      // Garante que o botão não ultrapasse o painel
       var painel = document.querySelector('.painel');
-      if (painel) {
-        var painelRect = painel.getBoundingClientRect();
-        maxX = Math.min(maxX, painelRect.right - botaoNao.offsetWidth);
-        maxY = Math.min(maxY, painelRect.bottom - botaoNao.offsetHeight);
+
+      if (!painel) return;
+
+      var painelRect = painel.getBoundingClientRect();
+
+      // Limitar para que o botão nunca ultrapasse os limites do painel
+      var maxX = painelRect.width - botaoNao.offsetWidth - 10;
+      var maxY = painelRect.height - botaoNao.offsetHeight - 10;
+
+      // Apenas para desktop (>600px)
+      if (window.innerWidth > 600) {
+        var aleatorioX = Math.floor(Math.random() * maxX);
+        var aleatorioY = Math.floor(Math.random() * maxY);
+
+        botaoNao.style.left = aleatorioX + "px";
+        botaoNao.style.top = aleatorioY + "px";
       }
-
-      var aleatorioX = Math.floor(Math.random() * maxX);
-      var aleatorioY = Math.floor(Math.random() * maxY);
-
-      botaoNao.style.left = aleatorioX + "px";
-      botaoNao.style.top = aleatorioY + "px";
     }
   </script>
 </body>
 </html>
-
