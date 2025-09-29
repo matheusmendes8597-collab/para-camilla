@@ -51,9 +51,8 @@
       border-radius: 10px;
       color: white;
       cursor: pointer;
-      /* posição inicial ao lado do botão SIM no desktop */
-      left: 80px;
-      top: calc(100px); 
+      left: 80px; /* posição inicial ao lado do Sim! */
+      top: 0px;   /* alinhar verticalmente com o Sim! */
     }
 
     h1 {
@@ -85,12 +84,9 @@
         max-width: 80%;
         height: auto;
       }
-    }
-
-    /* Ajustes específicos para PC */
-    @media (min-width: 601px) {
       #nao {
-        margin-left: 0;
+        left: 60px; /* posição inicial mobile */
+        top: 0px;
       }
     }
   </style>
@@ -108,10 +104,12 @@
   </div>
 
   <script>
-    function fuja() {
-      var botaoNao = document.getElementById("nao");
-      var painel = document.querySelector('.painel');
+    // Guarda a posição inicial
+    var botaoNao = document.getElementById("nao");
+    var posInicial = { left: botaoNao.offsetLeft, top: botaoNao.offsetTop };
 
+    function fuja() {
+      var painel = document.querySelector('.painel');
       if (!painel) return;
 
       var painelRect = painel.getBoundingClientRect();
@@ -131,9 +129,12 @@
 
         botaoNao.style.left = aleatorioX + "px";
         botaoNao.style.top = aleatorioY + "px";
+      } else {
+        // Mobile: mantém posição inicial
+        botaoNao.style.left = posInicial.left + "px";
+        botaoNao.style.top = posInicial.top + "px";
       }
     }
   </script>
 </body>
 </html>
-
