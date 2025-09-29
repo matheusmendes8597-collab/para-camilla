@@ -1,216 +1,241 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Camilla ❤️</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Camilla ❤️</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
-  html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    font-family: 'Poppins', sans-serif;
-    background-color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-  .painel {
-    background-color: white;
-    border-radius: 16px;
-    text-align: center;
-    padding: 35px 20px 55px 20px;
-    position: relative;
-    max-width: 450px;
-    width: 90%;
-    box-sizing: border-box;
-    z-index: 10;
-  }
+    .painel {
+      background-color: white;
+      border-radius: 16px;
+      text-align: center;
+      padding: 40px 20px 60px 20px;
+      position: relative;
+      max-width: 480px;
+      width: 90%;
+      box-sizing: border-box;
+      z-index: 1000;
+    }
 
-  .painel img {
-    display: block;
-    margin: 15px auto;
-    max-width: 100%;
-    height: auto;
-  }
+    .painel img {
+      display: block;
+      margin: 15px auto;
+      max-width: 100%;
+      height: auto;
+    }
 
-  h1 { 
-    margin: 10px 0; 
-    font-size: 26px; 
-    font-weight: bold;
-  }
+    h1 {
+      margin: 10px 0;
+      font-size: 28px;
+      font-weight: bold;
+    }
 
-  #contador-amor {
-    font-family: 'Poppins', sans-serif;
-    color: #ff0000;
-    font-size: 15px;
-    margin: 10px 0 14px 0;
-    text-align: center;
-  }
-  #contador-amor .destaque { font-weight: bold; }
+    #contador-amor {
+      font-family: 'Poppins', sans-serif;
+      color: #ff0000;
+      font-size: 16px;
+      margin: 12px 0 16px 0;
+      text-align: center;
+    }
 
-  h2 { 
-    margin: 10px 16px; 
-    font-size: 15px; 
-    font-weight: bold;
-  }
+    #contador-amor .destaque {
+      font-weight: bold;
+    }
 
-  #sim, #nao {
-    height: 40px;
-    width: 68px;
-    background-color: #ff0000;
-    border: 2px solid white;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
-    font-size: 14px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    position: absolute;
-    bottom: 15px;
-  }
+    h2 {
+      margin: 12px 16px;
+      font-size: 16px;
+      font-weight: normal;
+    }
 
-  @media (max-width: 600px) {
-    .painel { padding-bottom: 50px; }
-    h1 { font-size: 22px; }
-    #contador-amor { font-size: 13px; margin-bottom: 10px; }
-    h2 { font-size: 13px; }
-    #sim, #nao { height: 36px; width: 60px; font-size: 12px; }
-    .painel img { max-width: 80%; height: auto; }
-  }
+    #sim, #nao {
+      height: 42px;
+      width: 70px;
+      background-color: #ff0000;
+      border: 2px solid white;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: bold;
+      position: absolute;
+      bottom: 15px;
+    }
 
-  /* Chuva de corações */
-  #chuva-coracoes {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 99999;
-    opacity: 0.3; /* 30% de opacidade */
-  }
+    /* Chuva de corações */
+    #chuva-coracoes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 9999;
+      opacity: 0.5; /* 50% de opacidade */
+    }
 
-  .coracao {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background-image: url('https://static.vecteezy.com/system/resources/previews/018/868/329/non_2x/red-heart-symbol-on-transparent-background-free-png.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    pointer-events: none;
-    animation: cair 5s linear infinite;
-  }
+    .coracao {
+      position: absolute;
+      width: 20px; /* tamanho menor */
+      height: 20px; /* tamanho menor */
+      background-image: url('https://static.vecteezy.com/system/resources/previews/018/868/329/non_2x/red-heart-symbol-on-transparent-background-free-png.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      pointer-events: none;
+      animation: cair linear infinite;
+      opacity: 1;
+    }
 
-  @keyframes cair {
-    0% { transform: translateY(-30px); }
-    100% { transform: translateY(100vh); }
-  }
-</style>
+    @keyframes cair {
+      0% { transform: translateY(-30px); }
+      100% { transform: translateY(100vh); }
+    }
+
+    @media (max-width: 600px) {
+      .painel {
+        padding-bottom: 50px;
+      }
+      h1 {
+        font-size: 24px;
+      }
+      #contador-amor {
+        font-size: 14px;
+        margin-bottom: 12px;
+      }
+      h2 {
+        font-size: 14px;
+      }
+      #sim, #nao {
+        height: 36px;
+        width: 60px;
+        font-size: 12px;
+      }
+      .painel img {
+        max-width: 80%;
+        height: auto;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<!-- Chuva de corações -->
-<div id="chuva-coracoes"></div>
+  <!-- Chuva de corações -->
+  <div id="chuva-coracoes"></div>
 
-<div class="painel">
-  <h1>Camilla 🥰😍</h1>
+  <div class="painel">
+    <h1>Camilla 🥰😍</h1>
+    <p id="contador-amor"></p>
 
-  <!-- Contador de tempo -->
-  <p id="contador-amor"></p>
+    <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTQzejZ1MzR0eDZmeXdkeTZyOXF6eW1reWluNGRrbXVkdHkyb3Z4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RGue8n5u0Ky5lrdWsy/giphy.gif" alt="">
+    <img src="https://gifman.net/wp-content/uploads/2019/06/ursinho-fofo-apaixonado.gif" alt="">
 
-  <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTQzejZ1MzR0eDZmeXdkeTZyOXF6eW1reWluNGRrbXVkdHkyb3Z4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RGue8n5u0Ky5lrdWsy/giphy.gif" alt="">
-  <img src="https://gifman.net/wp-content/uploads/2019/06/ursinho-fofo-apaixonado.gif" alt="">
-  <h2>Me sinto tão sortudo por ter você na minha vida... Te amo hoje, amanhã e sempre! Fica comigo a vida inteira?</h2>
+    <h2>
+      Me sinto tão sortudo por ter você na minha vida... 
+      <span style="font-weight:bold;">Te amo hoje, amanhã e sempre!</span> 
+      Fica comigo a vida inteira?
+    </h2>
 
-  <a href="https://www.youtube.com/watch?v=oRvND-r57Us">
-    <button id="sim">Sim!</button>
-  </a>
-  <button onmouseover="fuja()" id="nao">Não!</button>
-</div>
+    <a href="https://www.youtube.com/watch?v=oRvND-r57Us">
+      <button id="sim">Sim!</button>
+    </a>
+    <button onmouseover="fuja()" id="nao">Não!</button>
+  </div>
 
-<script>
-  const dataInicio = new Date(2025, 8, 1); // 1 de setembro de 2025
+  <script>
+    const dataInicio = new Date(2025, 8, 1); // 1 de setembro de 2025
 
-  function plural(valor, singular, plural) {
-    return `${valor} ${valor === 1 ? singular : plural}`;
-  }
+    function plural(valor, singular, plural) {
+      return `${valor} ${valor === 1 ? singular : plural}`;
+    }
 
-  function atualizarContador() {
-    const agora = new Date();
-    let diff = agora - dataInicio;
+    function atualizarContador() {
+      const agora = new Date();
+      let diff = agora - dataInicio;
 
-    const segundosTotais = Math.floor(diff / 1000);
-    const dias = Math.floor(segundosTotais / (24 * 60 * 60));
-    const horas = Math.floor((segundosTotais % (24 * 60 * 60)) / 3600);
-    const minutos = Math.floor((segundosTotais % 3600) / 60);
-    const segundos = segundosTotais % 60;
+      const segundosTotais = Math.floor(diff / 1000);
+      const dias = Math.floor(segundosTotais / (24 * 60 * 60));
+      const horas = Math.floor((segundosTotais % (24 * 60 * 60)) / 3600);
+      const minutos = Math.floor((segundosTotais % 3600) / 60);
+      const segundos = segundosTotais % 60;
 
-    const options = { day: 'numeric', month: 'long', year: 'numeric' };
-    const dataFormatada = agora.toLocaleDateString('pt-BR', options);
+      const options = { day: 'numeric', month: 'long', year: 'numeric' };
+      const dataFormatada = agora.toLocaleDateString('pt-BR', options);
 
-    document.getElementById('contador-amor').innerHTML =
-      `Hoje é dia <span class="destaque">${dataFormatada}</span> e estou a 
-      <span class="destaque">${plural(dias,'dia','dias')}</span>, 
-      <span class="destaque">${plural(horas,'hora','horas')}</span>, 
-      <span class="destaque">${plural(minutos,'minuto','minutos')}</span> e 
-      <span class="destaque">${plural(segundos,'segundo','segundos')}</span> apaixonado por você!`;
-  }
+      document.getElementById('contador-amor').innerHTML =
+        `Hoje é dia <span class="destaque">${dataFormatada}</span> e estou a 
+        <span class="destaque">${plural(dias,'dia','dias')}</span>, 
+        <span class="destaque">${plural(horas,'hora','horas')}</span>, 
+        <span class="destaque">${plural(minutos,'minuto','minutos')}</span> e 
+        <span class="destaque">${plural(segundos,'segundo','segundos')}</span> 
+        apaixonado por você!`;
+    }
 
-  atualizarContador();
-  setInterval(atualizarContador, 1000);
+    atualizarContador();
+    setInterval(atualizarContador, 1000);
 
-  function posicionarBotoes() {
-    const sim = document.getElementById("sim");
-    const nao = document.getElementById("nao");
-    const painel = document.querySelector('.painel');
+    function posicionarBotoes() {
+      const sim = document.getElementById("sim");
+      const nao = document.getElementById("nao");
+      const painel = document.querySelector('.painel');
 
-    const painelWidth = painel.offsetWidth;
-    const totalWidth = sim.offsetWidth + nao.offsetWidth + 15;
-    const startX = (painelWidth - totalWidth) / 2;
+      const painelWidth = painel.offsetWidth;
+      const totalWidth = sim.offsetWidth + nao.offsetWidth + 15;
+      const startX = (painelWidth - totalWidth) / 2;
 
-    sim.style.left = startX + 'px';
-    nao.style.left = (startX + sim.offsetWidth + 15) + 'px';
-  }
+      sim.style.left = startX + 'px';
+      nao.style.left = (startX + sim.offsetWidth + 15) + 'px';
+    }
 
-  document.addEventListener('DOMContentLoaded', posicionarBotoes);
-  window.addEventListener('resize', posicionarBotoes);
+    document.addEventListener('DOMContentLoaded', posicionarBotoes);
+    window.addEventListener('resize', posicionarBotoes);
 
-  function fuja() {
-    const botaoNao = document.getElementById("nao");
-    const larguraJanela = window.innerWidth;
-    const alturaJanela = window.innerHeight;
+    function fuja() {
+      const botaoNao = document.getElementById("nao");
+      const larguraJanela = window.innerWidth;
+      const alturaJanela = window.innerHeight;
 
-    const maxX = larguraJanela - botaoNao.offsetWidth;
-    const maxY = alturaJanela - botaoNao.offsetHeight;
+      const maxX = larguraJanela - botaoNao.offsetWidth;
+      const maxY = alturaJanela - botaoNao.offsetHeight;
 
-    botaoNao.style.position = 'fixed';
-    botaoNao.style.left = Math.floor(Math.random() * maxX) + 'px';
-    botaoNao.style.top = Math.floor(Math.random() * maxY) + 'px';
-  }
+      botaoNao.style.position = 'fixed';
+      botaoNao.style.left = Math.floor(Math.random() * maxX) + 'px';
+      botaoNao.style.top = Math.floor(Math.random() * maxY) + 'px';
+    }
 
-  const container = document.getElementById('chuva-coracoes');
+    // Chuva de corações com tamanho único (20px) e opacidade 50%
+    function criarCoracao() {
+      const coracao = document.createElement("div");
+      coracao.classList.add("coracao");
 
-  function criarCoracao() {
-    const coracao = document.createElement('div');
-    coracao.classList.add('coracao');
-    coracao.style.left = Math.random() * window.innerWidth + 'px';
-    coracao.style.animationDuration = (4 + Math.random() * 3) + 's';
-    coracao.style.transform = `scale(${0.5 + Math.random() * 0.7})`;
-    container.appendChild(coracao);
+      coracao.style.left = Math.random() * 100 + "vw";
 
-    setTimeout(() => { coracao.remove(); }, 7000);
-  }
+      const duracao = Math.random() * 3 + 2;
+      coracao.style.animationDuration = duracao + "s";
 
-  setInterval(criarCoracao, 300);
-</script>
+      document.getElementById("chuva-coracoes").appendChild(coracao);
+
+      setTimeout(() => coracao.remove(), duracao * 1000);
+    }
+
+    setInterval(criarCoracao, 300);
+  </script>
 </body>
 </html>
-
