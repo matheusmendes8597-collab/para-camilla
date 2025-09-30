@@ -8,86 +8,120 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
+  :root {
+    --accent-red: #ff0000;
+    --gold: #ffd700;
+    --neon-red: #ff4d6d;
+    --silver: #c0c0c0;
+  }
+
   html, body {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
-    overflow-y: auto; /* permite scroll só quando precisar */
+    overflow-y: auto;   /* scroll vertical sempre que precisar */
+    overflow-x: hidden; /* evita barra lateral */
     font-family: 'Poppins', sans-serif;
     background-color: #fff;
   }
 
   body {
-    display: block; /* removido flex para scroll funcionar corretamente */
+    display: block;
   }
 
   .painel {
     background-color: white;
     border-radius: 16px;
     text-align: center;
-    padding: 35px 20px 55px 20px;
+    padding: 20px 15px 40px 15px;
     position: relative;
     max-width: 450px;
     width: 90%;
     box-sizing: border-box;
     z-index: 10;
-    margin: 50px auto; /* centraliza horizontal e dá espaçamento vertical */
+    margin: 25px auto;
   }
 
   .painel img {
     display: block;
-    margin: 15px auto;
+    margin: 8px auto;
     max-width: 100%;
     height: auto;
   }
 
-  h1 { 
-    margin: 10px 0; 
-    font-size: 26px; 
+  /* Header com respiração sutil */
+  .header h1 {
+    font-size: 26px; /* tamanho original */
     font-weight: bold;
+    margin: 8px 0 12px 0;
+    position: relative;
+    display: inline-block;
+    animation: breathe 3s ease-in-out infinite alternate; /* respiração no conjunto Camilla + emojis */
+  }
+
+  .header h1 .nome {
+    background: linear-gradient(45deg, var(--accent-red), var(--gold), var(--neon-red), var(--silver));
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 4s ease infinite;
+  }
+
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes breathe {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
   }
 
   #contador-amor {
     font-family: 'Poppins', sans-serif;
     color: #ff0000;
-    font-size: 15px;
-    margin: 10px 0 14px 0;
+    font-size: 14px;
+    margin: 5px 0 12px 0;
     text-align: center;
   }
   #contador-amor .destaque { font-weight: bold; }
 
   h2 { 
-    margin: 10px 16px; 
+    margin: 10px 12px 20px 12px; /* aumento do espaço inferior para 20px */
     font-size: 15px; 
     font-weight: normal;
+    color: #570010; /* cor ajustada */
   }
 
   #sim, #nao {
-    height: 40px;
-    width: 68px;
+    height: 38px;
+    width: 66px;
     background-color: #ff0000;
     border: 2px solid white;
     border-radius: 10px;
     color: white;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
     position: absolute;
-    bottom: 15px;
+    bottom: 10px;
   }
 
   @media (max-width: 600px) {
     .painel { 
-      padding-bottom: 50px; 
-      margin-top: 1px; /* painel praticamente no topo */
+      padding-bottom: 40px; 
+      margin-top: 10px;
     }
-    h1 { font-size: 22px; }
-    #contador-amor { font-size: 13px; margin-bottom: 10px; }
-    h2 { font-size: 13px; }
-    #sim, #nao { height: 36px; width: 60px; font-size: 12px; }
-    .painel img { max-width: 80%; height: auto; }
+    .header h1 { font-size: 22px; }
+    h2 { font-size: 13px; margin-bottom: 20px; } /* mesmo espaçamento aumentado no mobile */
+    #contador-amor { font-size: 12px; margin-bottom: 8px; }
+    #sim, #nao { height: 34px; width: 58px; font-size: 11px; }
+    .painel img { max-width: 80%; height: auto; margin: 6px auto; }
   }
 
   /* Chuva de corações */
@@ -126,14 +160,20 @@
 <div id="chuva-coracoes"></div>
 
 <div class="painel">
-  <h1>Camilla 🥰😍</h1>
+  <div class="header">
+    <h1><span class="nome">Camilla</span> 🥰😍</h1>
+  </div>
 
   <!-- Contador de tempo -->
   <p id="contador-amor"></p>
 
   <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTQzejZ1MzR0eDZmeXdkeTZyOXF6eW1reWluNGRrbXVkdHkyb3Z4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RGue8n5u0Ky5lrdWsy/giphy.gif" alt="">
   <img src="https://gifman.net/wp-content/uploads/2019/06/ursinho-fofo-apaixonado.gif" alt="">
-  <h2>Em meus olhos, você sempre será minha pessoa favorita... <strong>Te amo hoje, amanhã e sempre!</strong> Fica comigo a vida inteira?</h2>
+
+  <h2>Em meus olhos, você sempre será minha pessoa favorita... 
+    <strong>Te amo hoje, amanhã e sempre!</strong> 
+    Fica comigo a vida inteira?
+  </h2>
 
   <a href="https://www.youtube.com/watch?v=oRvND-r57Us">
     <button id="sim">Sim!</button>
@@ -142,7 +182,7 @@
 </div>
 
 <script>
-  const dataInicio = new Date(2025, 8, 1); // 1 de setembro de 2025
+  const dataInicio = new Date(2025, 8, 1);
 
   function plural(valor, singular, plural) {
     return `${valor} ${valor === 1 ? singular : plural}`;
