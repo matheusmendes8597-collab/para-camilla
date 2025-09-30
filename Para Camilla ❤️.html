@@ -20,17 +20,16 @@
     padding: 0;
     width: 100%;
     min-height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
     font-family: 'Poppins', sans-serif;
     background-color: #fff;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
   }
 
-  body {
-    display: flex;
-    flex-direction: column;
+  /* PC e tablet: remover scroll se não necessário */
+  @media (min-width: 601px) {
+    html, body { overflow-y: hidden; }
   }
 
   .painel {
@@ -84,7 +83,6 @@
   }
 
   #contador-amor {
-    font-family: 'Poppins', sans-serif;
     color: #ff0000;
     font-size: 14px;
     margin: 5px 0 12px 0;
@@ -92,13 +90,16 @@
   }
   #contador-amor .destaque { font-weight: bold; }
 
+  /* Texto principal */
   h2 { 
-    margin: 10px 12px 20px 12px;
     font-size: 15px; 
     font-weight: normal;
     color: #570010;
+    margin-top: 48px; /* +1 linha extra de espaçamento em todos dispositivos */
+    margin-bottom: 20px; /* espaço entre texto e botões */
   }
 
+  /* Botões */
   #sim, #nao {
     height: 38px;
     width: 66px;
@@ -116,21 +117,20 @@
 
   /* Mobile */
   @media (max-width: 600px) {
-    .painel { 
-      padding-bottom: 40px; 
-      margin-top: 10px;
-    }
+    .painel { padding-bottom: 40px; margin-top: 10px; }
     .header h1 { font-size: 22px; }
-    h2 { font-size: 13px; margin-bottom: 20px; }
+    h2 { font-size: 13px; margin-top: 48px; margin-bottom: 8px; }
     #contador-amor { font-size: 12px; margin-bottom: 8px; }
     #sim, #nao { height: 34px; width: 58px; font-size: 11px; }
     .painel img { max-width: 80%; height: auto; margin: 6px auto; }
-    .rodape { font-size: 13px; margin-top: auto; }
+    .rodape { font-size: 13px; padding: 7px 15px; margin-top: auto; }
+    .gallery { width: 150px; margin-left: auto; margin-right: auto; gap: 5px; margin-bottom: 12px; }
   }
 
   /* PC e tablet */
   @media (min-width: 601px) {
-    .rodape { font-size: 14px; margin-top: auto; } /* Aumenta o tamanho e empurra para baixo */
+    .rodape { font-size: 14px; padding: 70px 20px; margin-top: auto; }
+    .gallery { width: 180px; margin-left: auto; margin-right: auto; gap: 10px; margin-bottom: 15px; }
   }
 
   /* Chuva de corações */
@@ -157,30 +157,55 @@
     animation: cair 5s linear infinite;
   }
 
-  @keyframes cair {
-    0% { transform: translateY(-30px); }
-    100% { transform: translateY(100vh); }
+  @keyframes cair { 0% { transform: translateY(-30px); } 100% { transform: translateY(100vh); } }
+
+  /* Galeria de imagens */
+  .gallery {
+    --d: 10s;
+    display: grid;
+    place-items: center;
   }
 
-  /* Rodapé agora rolando junto e empurrado para o limite inferior */
+  .gallery > img {
+    grid-area: 1/1;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 10px solid #f2f2f2;
+    box-shadow: 0 0 4px #0007;
+    z-index: 2;
+    animation: slide var(--d) infinite, z-order var(--d) infinite steps(1);
+  }
+
+  .gallery img:last-child { animation-name: slide, z-order-last; }
+
+  .gallery > img:nth-child(1) { animation-delay: calc(0*var(--d)); --r: 16deg; }
+  .gallery > img:nth-child(2) { animation-delay: calc(-0.2*var(--d)); --r: -1deg; }
+  .gallery > img:nth-child(3) { animation-delay: calc(-0.4*var(--d)); --r: -19deg; }
+  .gallery > img:nth-child(4) { animation-delay: calc(-0.6*var(--d)); --r: 6deg; }
+  .gallery > img:nth-child(5) { animation-delay: calc(-0.8*var(--d)); --r: -8deg; }
+
+  @keyframes slide { 10% { transform: translateX(120%) rotate(var(--r)); } 0%,100%,20% { transform: translateX(0%) rotate(var(--r)); } }
+  @keyframes z-order { 10%,20% { z-index:1; } 80% { z-index:2; } }
+  @keyframes z-order-last { 10%,20% { z-index:1; } 90% { z-index:2; } }
+
+  /* Rodapé */
   .rodape {
     position: relative;
     width: 100%;
     text-align: center;
     color: #570010;
-    padding: 8px 15px;
     box-sizing: border-box;
     line-height: 1.5;
     word-wrap: break-word;
     background: transparent;
-    margin-top: auto; /* força ficar no final do fluxo */
+    padding: 15px 20px; /* espaçamento do limite da tela */
   }
   .rodape strong { font-weight: bold; }
 </style>
 </head>
 <body>
 
-<!-- Chuva de corações -->
 <div id="chuva-coracoes"></div>
 
 <div class="painel">
@@ -188,13 +213,20 @@
     <h1><span class="nome">Camilla</span> 🥰😍</h1>
   </div>
 
-  <!-- Contador de tempo -->
   <p id="contador-amor"></p>
 
   <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTQzejZ1MzR0eDZmeXdkeTZyOXF6eW1reWluNGRrbXVkdHkyb3Z4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RGue8n5u0Ky5lrdWsy/giphy.gif" alt="">
-  <img src="https://gifman.net/wp-content/uploads/2019/06/ursinho-fofo-apaixonado.gif" alt="">
 
-  <h2>Em meus olhos, você sempre será minha pessoa favorita... 
+  <div class="gallery">
+    <img src="https://i.ibb.co/ccQPZmSY/05.jpg" alt="">
+    <img src="https://i.ibb.co/bjch0ccT/034.jpg" alt="">
+    <img src="https://i.ibb.co/nNWxBnVg/03.jpg" alt="">
+    <img src="https://i.ibb.co/jP2ckQh5/02.jpg" alt="">
+    <img src="https://i.ibb.co/QvwMphpz/01.jpg" alt="">
+  </div>
+
+  <h2>
+    Em meus olhos, você sempre será minha pessoa favorita... 
     <strong>Te amo hoje, amanhã e sempre!</strong> 
     Fica comigo a vida inteira?
   </h2>
@@ -205,86 +237,75 @@
   <button onmouseover="fuja()" id="nao">Não!</button>
 </div>
 
-<!-- Rodapé agora rolando junto -->
 <div class="rodape">
   Feito pelo homem mais cheiroso, bonito, esperto, estiloso e fiel desse mundo - <strong>Matheus Henrique</strong>.
 </div>
 
 <script>
-  const dataInicio = new Date(2025, 8, 1);
+const dataInicio = new Date(2025, 8, 1);
 
-  function plural(valor, singular, plural) {
-    return `${valor} ${valor === 1 ? singular : plural}`;
-  }
+function plural(valor, singular, plural) { return `${valor} ${valor===1? singular: plural}`; }
 
-  function atualizarContador() {
-    const agora = new Date();
-    let diff = agora - dataInicio;
+function atualizarContador() {
+  const agora = new Date();
+  let diff = agora - dataInicio;
+  const segundosTotais = Math.floor(diff/1000);
+  const dias = Math.floor(segundosTotais / (24*60*60));
+  const horas = Math.floor((segundosTotais % (24*60*60))/3600);
+  const minutos = Math.floor((segundosTotais%3600)/60);
+  const segundos = segundosTotais % 60;
+  const options = { day:'numeric', month:'long', year:'numeric' };
+  const dataFormatada = agora.toLocaleDateString('pt-BR', options);
 
-    const segundosTotais = Math.floor(diff / 1000);
-    const dias = Math.floor(segundosTotais / (24 * 60 * 60));
-    const horas = Math.floor((segundosTotais % (24 * 60 * 60)) / 3600);
-    const minutos = Math.floor((segundosTotais % 3600) / 60);
-    const segundos = segundosTotais % 60;
+  document.getElementById('contador-amor').innerHTML = 
+    `Hoje é dia <span class="destaque">${dataFormatada}</span> e estou a 
+    <span class="destaque">${plural(dias,'dia','dias')}</span>, 
+    <span class="destaque">${plural(horas,'hora','horas')}</span>, 
+    <span class="destaque">${plural(minutos,'minuto','minutos')}</span> e 
+    <span class="destaque">${plural(segundos,'segundo','segundos')}</span> apaixonado por você :)`;
+}
 
-    const options = { day: 'numeric', month: 'long', year: 'numeric' };
-    const dataFormatada = agora.toLocaleDateString('pt-BR', options);
+atualizarContador();
+setInterval(atualizarContador, 1000);
 
-    document.getElementById('contador-amor').innerHTML =
-      `Hoje é dia <span class="destaque">${dataFormatada}</span> e estou a 
-      <span class="destaque">${plural(dias,'dia','dias')}</span>, 
-      <span class="destaque">${plural(horas,'hora','horas')}</span>, 
-      <span class="destaque">${plural(minutos,'minuto','minutos')}</span> e 
-      <span class="destaque">${plural(segundos,'segundo','segundos')}</span> apaixonado por você :)`;
-  }
+function posicionarBotoes() {
+  const sim = document.getElementById("sim");
+  const nao = document.getElementById("nao");
+  const painel = document.querySelector('.painel');
+  const painelWidth = painel.offsetWidth;
+  const totalWidth = sim.offsetWidth + nao.offsetWidth + 15;
+  const startX = (painelWidth - totalWidth)/2;
+  sim.style.left = startX+'px';
+  nao.style.left = (startX+sim.offsetWidth+15)+'px';
+}
 
-  atualizarContador();
-  setInterval(atualizarContador, 1000);
+document.addEventListener('DOMContentLoaded', posicionarBotoes);
+window.addEventListener('resize', posicionarBotoes);
 
-  function posicionarBotoes() {
-    const sim = document.getElementById("sim");
-    const nao = document.getElementById("nao");
-    const painel = document.querySelector('.painel');
+function fuja() {
+  const botaoNao = document.getElementById("nao");
+  const larguraJanela = window.innerWidth;
+  const alturaJanela = window.innerHeight;
+  const maxX = larguraJanela - botaoNao.offsetWidth;
+  const maxY = alturaJanela - botaoNao.offsetHeight;
+  botaoNao.style.position = 'fixed';
+  botaoNao.style.left = Math.floor(Math.random()*maxX)+'px';
+  botaoNao.style.top = Math.floor(Math.random()*maxY)+'px';
+}
 
-    const painelWidth = painel.offsetWidth;
-    const totalWidth = sim.offsetWidth + nao.offsetWidth + 15;
-    const startX = (painelWidth - totalWidth) / 2;
+const container = document.getElementById('chuva-coracoes');
 
-    sim.style.left = startX + 'px';
-    nao.style.left = (startX + sim.offsetWidth + 15) + 'px';
-  }
+function criarCoracao() {
+  const coracao = document.createElement('div');
+  coracao.classList.add('coracao');
+  coracao.style.left = Math.random()*window.innerWidth+'px';
+  coracao.style.animationDuration = (4+Math.random()*3)+'s';
+  coracao.style.transform = `scale(${0.5+Math.random()*0.7})`;
+  container.appendChild(coracao);
+  setTimeout(()=>{coracao.remove();},7000);
+}
 
-  document.addEventListener('DOMContentLoaded', posicionarBotoes);
-  window.addEventListener('resize', posicionarBotoes);
-
-  function fuja() {
-    const botaoNao = document.getElementById("nao");
-    const larguraJanela = window.innerWidth;
-    const alturaJanela = window.innerHeight;
-
-    const maxX = larguraJanela - botaoNao.offsetWidth;
-    const maxY = alturaJanela - botaoNao.offsetHeight;
-
-    botaoNao.style.position = 'fixed';
-    botaoNao.style.left = Math.floor(Math.random() * maxX) + 'px';
-    botaoNao.style.top = Math.floor(Math.random() * maxY) + 'px';
-  }
-
-  const container = document.getElementById('chuva-coracoes');
-
-  function criarCoracao() {
-    const coracao = document.createElement('div');
-    coracao.classList.add('coracao');
-    coracao.style.left = Math.random() * window.innerWidth + 'px';
-    coracao.style.animationDuration = (4 + Math.random() * 3) + 's';
-    coracao.style.transform = `scale(${0.5 + Math.random() * 0.7})`;
-    container.appendChild(coracao);
-
-    setTimeout(() => { coracao.remove(); }, 7000);
-  }
-
-  setInterval(criarCoracao, 300);
+setInterval(criarCoracao,300);
 </script>
 </body>
 </html>
-
