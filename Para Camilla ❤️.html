@@ -27,7 +27,6 @@
     overflow-x: hidden;
   }
 
-  /* PC e tablet: remover scroll se não necessário */
   @media (min-width: 601px) {
     html, body { overflow-y: hidden; }
   }
@@ -90,16 +89,15 @@
   }
   #contador-amor .destaque { font-weight: bold; }
 
-  /* Texto principal */
   h2 { 
     font-size: 15px; 
     font-weight: normal;
     color: #570010;
-    margin-top: 48px; /* +1 linha extra de espaçamento em todos dispositivos */
-    margin-bottom: 20px; /* espaço entre texto e botões */
+    margin-top: 48px;
+    margin-bottom: 20px;
   }
 
-  /* Botões */
+  /* Botões atualizados para ficarem acima de tudo */
   #sim, #nao {
     height: 38px;
     width: 66px;
@@ -113,9 +111,9 @@
     font-weight: bold;
     position: absolute;
     bottom: 10px;
+    z-index: 9999; /* Garante que os botões fiquem acima da galeria */
   }
 
-  /* Mobile */
   @media (max-width: 600px) {
     .painel { padding-bottom: 40px; margin-top: 10px; }
     .header h1 { font-size: 22px; }
@@ -127,13 +125,11 @@
     .gallery { width: 150px; margin-left: auto; margin-right: auto; gap: 5px; margin-bottom: 12px; }
   }
 
-  /* PC e tablet */
   @media (min-width: 601px) {
     .rodape { font-size: 14px; padding: 70px 20px; margin-top: auto; }
     .gallery { width: 180px; margin-left: auto; margin-right: auto; gap: 10px; margin-bottom: 15px; }
   }
 
-  /* Chuva de corações */
   #chuva-coracoes {
     position: fixed;
     top: 0;
@@ -159,7 +155,6 @@
 
   @keyframes cair { 0% { transform: translateY(-30px); } 100% { transform: translateY(100vh); } }
 
-  /* Galeria de imagens */
   .gallery {
     --d: 10s;
     display: grid;
@@ -189,7 +184,6 @@
   @keyframes z-order { 10%,20% { z-index:1; } 80% { z-index:2; } }
   @keyframes z-order-last { 10%,20% { z-index:1; } 90% { z-index:2; } }
 
-  /* Rodapé */
   .rodape {
     position: relative;
     width: 100%;
@@ -199,7 +193,7 @@
     line-height: 1.5;
     word-wrap: break-word;
     background: transparent;
-    padding: 15px 20px; /* espaçamento do limite da tela */
+    padding: 15px 20px;
   }
   .rodape strong { font-weight: bold; }
 </style>
