@@ -6,196 +6,191 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Para Camilla ❤️</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
-  :root {
-    --accent-red: #ff0000;
-    --gold: #ffd700;
-    --neon-red: #ff4d6d;
-    --silver: #c0c0c0;
-  }
+:root {
+  --accent-red: #ff0000;
+  --gold: #ffd700;
+  --neon-red: #ff4d6d;
+  --silver: #c0c0c0;
+}
 
-  html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100%;
-    font-family: 'Poppins', sans-serif;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-  }
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+  width: 100%;
+  height: auto;
+  overflow-x: auto; /* scroll horizontal se necessário */
+  overflow-y: auto; /* scroll vertical se necessário */
+}
 
-  @media (min-width: 601px) {
-    html, body { overflow-y: hidden; }
-  }
+.painel {
+  background-color: white;
+  border-radius: 16px;
+  text-align: center;
+  padding: 20px 15px 60px 15px; /* mais espaço embaixo para os botões */
+  position: relative;
+  max-width: 450px;
+  width: 90%;
+  box-sizing: border-box;
+  margin: 25px auto;
+}
 
-  .painel {
-    background-color: white;
-    border-radius: 16px;
-    text-align: center;
-    padding: 20px 15px 40px 15px;
-    position: relative;
-    max-width: 450px;
-    width: 90%;
-    box-sizing: border-box;
-    z-index: 10;
-    margin: 25px auto;
-  }
+.painel img {
+  display: block;
+  margin: 8px auto;
+  max-width: 100%;
+  height: auto;
+}
 
-  .painel img {
-    display: block;
-    margin: 8px auto;
-    max-width: 100%;
-    height: auto;
-  }
+.header h1 {
+  font-size: 26px;
+  font-weight: bold;
+  margin: 8px 0 12px 0;
+  position: relative;
+  display: inline-block;
+  animation: breathe 3s ease-in-out infinite alternate;
+}
 
-  .header h1 {
-    font-size: 26px;
-    font-weight: bold;
-    margin: 8px 0 12px 0;
-    position: relative;
-    display: inline-block;
-    animation: breathe 3s ease-in-out infinite alternate;
-  }
+.header h1 .nome {
+  background: linear-gradient(45deg, var(--accent-red), var(--gold), var(--neon-red), var(--silver));
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 4s ease infinite;
+}
 
-  .header h1 .nome {
-    background: linear-gradient(45deg, var(--accent-red), var(--gold), var(--neon-red), var(--silver));
-    background-size: 400% 400%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradient-shift 4s ease infinite;
-  }
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-  @keyframes gradient-shift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+@keyframes breathe {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
 
-  @keyframes breathe {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.03); }
-    100% { transform: scale(1); }
-  }
+#contador-amor {
+  color: #ff0000;
+  font-size: 14px;
+  margin: 5px 0 12px 0;
+  text-align: center;
+}
+#contador-amor .destaque { font-weight: bold; }
 
-  #contador-amor {
-    color: #ff0000;
-    font-size: 14px;
-    margin: 5px 0 12px 0;
-    text-align: center;
-  }
-  #contador-amor .destaque { font-weight: bold; }
+h2 { 
+  font-size: 15px; 
+  font-weight: normal;
+  color: #570010;
+  margin-top: 48px;
+  margin-bottom: 20px;
+}
 
-  h2 { 
-    font-size: 15px; 
-    font-weight: normal;
-    color: #570010;
-    margin-top: 48px;
-    margin-bottom: 20px;
-  }
+/* Botões atualizados */
+#sim, #nao {
+  height: 38px;
+  width: 66px;
+  background-color: #ff0000;
+  border: 2px solid white;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  position: absolute;
+  bottom: 10px;
+  z-index: 9999;
+}
 
-  /* Botões atualizados para ficarem acima de tudo */
-  #sim, #nao {
-    height: 38px;
-    width: 66px;
-    background-color: #ff0000;
-    border: 2px solid white;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
-    font-size: 13px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: bold;
-    position: absolute;
-    bottom: 10px;
-    z-index: 9999; /* Garante que os botões fiquem acima da galeria */
-  }
+@media (max-width: 600px) {
+  .painel { padding-bottom: 50px; margin-top: 10px; }
+  .header h1 { font-size: 22px; }
+  h2 { font-size: 13px; margin-top: 48px; margin-bottom: 8px; }
+  #contador-amor { font-size: 12px; margin-bottom: 8px; }
+  #sim, #nao { height: 34px; width: 58px; font-size: 11px; }
+  .painel img { max-width: 80%; margin: 6px auto; }
+  .rodape { font-size: 13px; padding: 7px 15px; margin-top: auto; }
+  .gallery { width: 150px; margin-left: auto; margin-right: auto; gap: 5px; margin-bottom: 12px; }
+}
 
-  @media (max-width: 600px) {
-    .painel { padding-bottom: 40px; margin-top: 10px; }
-    .header h1 { font-size: 22px; }
-    h2 { font-size: 13px; margin-top: 48px; margin-bottom: 8px; }
-    #contador-amor { font-size: 12px; margin-bottom: 8px; }
-    #sim, #nao { height: 34px; width: 58px; font-size: 11px; }
-    .painel img { max-width: 80%; height: auto; margin: 6px auto; }
-    .rodape { font-size: 13px; padding: 7px 15px; margin-top: auto; }
-    .gallery { width: 150px; margin-left: auto; margin-right: auto; gap: 5px; margin-bottom: 12px; }
-  }
+@media (min-width: 601px) {
+  .rodape { font-size: 14px; padding: 70px 20px; margin-top: auto; }
+  .gallery { width: 180px; margin-left: auto; margin-right: auto; gap: 10px; margin-bottom: 15px; }
+}
 
-  @media (min-width: 601px) {
-    .rodape { font-size: 14px; padding: 70px 20px; margin-top: auto; }
-    .gallery { width: 180px; margin-left: auto; margin-right: auto; gap: 10px; margin-bottom: 15px; }
-  }
+#chuva-coracoes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 99999;
+  opacity: 0.3;
+}
 
-  #chuva-coracoes {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 99999;
-    opacity: 0.3;
-  }
+.coracao {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-image: url('https://static.vecteezy.com/system/resources/previews/018/868/329/non_2x/red-heart-symbol-on-transparent-background-free-png.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  animation: cair 5s linear infinite;
+}
 
-  .coracao {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background-image: url('https://static.vecteezy.com/system/resources/previews/018/868/329/non_2x/red-heart-symbol-on-transparent-background-free-png.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    pointer-events: none;
-    animation: cair 5s linear infinite;
-  }
+@keyframes cair { 0% { transform: translateY(-30px); } 100% { transform: translateY(100vh); } }
 
-  @keyframes cair { 0% { transform: translateY(-30px); } 100% { transform: translateY(100vh); } }
+.gallery {
+  --d: 10s;
+  display: grid;
+  place-items: center;
+  z-index: 1;
+}
 
-  .gallery {
-    --d: 10s;
-    display: grid;
-    place-items: center;
-  }
+.gallery > img {
+  grid-area: 1/1;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 10px solid #f2f2f2;
+  box-shadow: 0 0 4px #0007;
+  z-index: 2;
+  animation: slide var(--d) infinite, z-order var(--d) infinite steps(1);
+}
 
-  .gallery > img {
-    grid-area: 1/1;
-    width: 100%;
-    aspect-ratio: 1;
-    object-fit: cover;
-    border: 10px solid #f2f2f2;
-    box-shadow: 0 0 4px #0007;
-    z-index: 2;
-    animation: slide var(--d) infinite, z-order var(--d) infinite steps(1);
-  }
+.gallery img:last-child { animation-name: slide, z-order-last; }
 
-  .gallery img:last-child { animation-name: slide, z-order-last; }
+.gallery > img:nth-child(1) { animation-delay: calc(0*var(--d)); --r: 16deg; }
+.gallery > img:nth-child(2) { animation-delay: calc(-0.2*var(--d)); --r: -1deg; }
+.gallery > img:nth-child(3) { animation-delay: calc(-0.4*var(--d)); --r: -19deg; }
+.gallery > img:nth-child(4) { animation-delay: calc(-0.6*var(--d)); --r: 6deg; }
+.gallery > img:nth-child(5) { animation-delay: calc(-0.8*var(--d)); --r: -8deg; }
 
-  .gallery > img:nth-child(1) { animation-delay: calc(0*var(--d)); --r: 16deg; }
-  .gallery > img:nth-child(2) { animation-delay: calc(-0.2*var(--d)); --r: -1deg; }
-  .gallery > img:nth-child(3) { animation-delay: calc(-0.4*var(--d)); --r: -19deg; }
-  .gallery > img:nth-child(4) { animation-delay: calc(-0.6*var(--d)); --r: 6deg; }
-  .gallery > img:nth-child(5) { animation-delay: calc(-0.8*var(--d)); --r: -8deg; }
+@keyframes slide { 10% { transform: translateX(120%) rotate(var(--r)); } 0%,100%,20% { transform: translateX(0%) rotate(var(--r)); } }
+@keyframes z-order { 10%,20% { z-index:1; } 80% { z-index:2; } }
+@keyframes z-order-last { 10%,20% { z-index:1; } 90% { z-index:2; } }
 
-  @keyframes slide { 10% { transform: translateX(120%) rotate(var(--r)); } 0%,100%,20% { transform: translateX(0%) rotate(var(--r)); } }
-  @keyframes z-order { 10%,20% { z-index:1; } 80% { z-index:2; } }
-  @keyframes z-order-last { 10%,20% { z-index:1; } 90% { z-index:2; } }
-
-  .rodape {
-    position: relative;
-    width: 100%;
-    text-align: center;
-    color: #570010;
-    box-sizing: border-box;
-    line-height: 1.5;
-    word-wrap: break-word;
-    background: transparent;
-    padding: 15px 20px;
-  }
-  .rodape strong { font-weight: bold; }
+.rodape {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  color: #570010;
+  box-sizing: border-box;
+  line-height: 1.5;
+  word-wrap: break-word;
+  background: transparent;
+  padding: 15px 20px;
+}
+.rodape strong { font-weight: bold; }
 </style>
 </head>
 <body>
