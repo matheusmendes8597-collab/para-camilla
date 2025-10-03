@@ -374,52 +374,44 @@ function criarCoracaoInicio() {
 }
 setInterval(criarCoracaoInicio,300);
 
-/* Contador de amor com plural e anos */
-const dataInicio = new Date(2025, 8, 1); // 1º de setembro
+/* Contador de amor com anos, meses, dias, horas, minutos e segundos */
+const dataInicio = new Date(2025, 8, 1); // 1 de setembro de 2025
 function plural(valor, singular, plural) { return `${valor} ${valor===1? singular: plural}`; }
 
 function atualizarContador() {
   const agora = new Date();
-  let diff = agora - dataInicio;
-  const segundosTotais = Math.floor(diff/1000);
 
-  const diasTotais = Math.floor(segundosTotais / (24*60*60));
-  const anos = Math.floor(diasTotais / 365);
-  const meses = Math.floor((diasTotais % 365) / 30);
-  const dias = diasTotais % 30;
-  const horas = Math.floor((segundosTotais % (24*60*60))/3600);
-  const minutos = Math.floor((segundosTotais % 3600)/60);
-  const segundos = segundosTotais % 60;
+  let anos = agora.getFullYear() - dataInicio.getFullYear();
+  let meses = agora.getMonth() - dataInicio.getMonth();
+  let dias = agora.getDate() - dataInicio.getDate();
+  let horas = agora.getHours() - dataInicio.getHours();
+  let minutos = agora.getMinutes() - dataInicio.getMinutes();
+  let segundos = agora.getSeconds() - dataInicio.getSeconds();
+
+  if(segundos<0){ segundos+=60; minutos--; }
+  if(minutos<0){ minutos+=60; horas--; }
+  if(horas<0){ horas+=24; dias--; }
+  if(dias<0){ 
+    const mesAnterior = new Date(agora.getFullYear(), agora.getMonth(), 0);
+    dias+= mesAnterior.getDate();
+    meses--;
+  }
+  if(meses<0){ meses+=12; anos--; }
+
+  let partes = [];
+  if(anos>0) partes.push(plural(anos,'ano','anos'));
+  if(meses>0) partes.push(plural(meses,'mês','meses'));
+  if(dias>0) partes.push(plural(dias,'dia','dias'));
+  partes.push(plural(horas,'hora','horas'));
+  partes.push(plural(minutos,'minuto','minutos'));
+  partes.push(plural(segundos,'segundo','segundos'));
 
   const options = { day:'numeric', month:'long', year:'numeric' };
   const dataFormatada = agora.toLocaleDateString('pt-BR', options);
 
-  let tempoAmor = '';
-
-  if (anos >= 1) {
-    tempoAmor = `<span class="destaque">${plural(anos,'ano','anos')}</span>`;
-    if (meses>0) tempoAmor += `, <span class="destaque">${plural(meses,'mês','meses')}</span>`;
-    if (dias>0) tempoAmor += `, <span class="destaque">${plural(dias,'dia','dias')}</span>`;
-    tempoAmor += `, <span class="destaque">${plural(horas,'hora','horas')}</span>, 
-                   <span class="destaque">${plural(minutos,'minuto','minutos')}</span> e 
-                   <span class="destaque">${plural(segundos,'segundo','segundos')}</span>`;
-  } else if (meses >= 1) {
-    tempoAmor = `<span class="destaque">${plural(meses,'mês','meses')}</span>`;
-    if (dias>0) tempoAmor += `, <span class="destaque">${plural(dias,'dia','dias')}</span>`;
-    tempoAmor += `, <span class="destaque">${plural(horas,'hora','horas')}</span>, 
-                   <span class="destaque">${plural(minutos,'minuto','minutos')}</span> e 
-                   <span class="destaque">${plural(segundos,'segundo','segundos')}</span>`;
-  } else {
-    tempoAmor = `<span class="destaque">${plural(diasTotais,'dia','dias')}</span>, 
-                 <span class="destaque">${plural(horas,'hora','horas')}</span>, 
-                 <span class="destaque">${plural(minutos,'minuto','minutos')}</span> e 
-                 <span class="destaque">${plural(segundos,'segundo','segundos')}</span>`;
-  }
-
   document.getElementById('contador-amor').innerHTML = 
-    `Hoje é dia <span class="destaque">${dataFormatada}</span> e estou a ${tempoAmor} apaixonado por você :)`;
+    `Hoje é dia <span class="destaque">${dataFormatada}</span> e estou a <span class="destaque">${partes.join(', ')}</span> apaixonado por você :)`;
 }
-
 atualizarContador();
 setInterval(atualizarContador, 1000);
 
@@ -431,39 +423,34 @@ function posicionarBotoes() {
   const painelWidth = painel.offsetWidth;
   const totalWidth = sim.offsetWidth + nao.offsetWidth + 15;
   const startX = (painelWidth - totalWidth)/2;
-  sim.style.left = startX + 'px';
-  nao.style.left = (startX + sim.offsetWidth + 15) + 'px';
+  sim.style.left = startX+'px';
+  nao.style.left = (startX+sim.offsetWidth+15)+'px';
 }
-window.onload = posicionarBotoes;
-window.onresize = posicionarBotoes;
-
-/* Fuja do "Não" */
+document.addEventListener('DOMContentLoaded', posicionarBotoes);
+window.addEventListener('resize', posicionarBotoes);
 function fuja() {
-  const nao = document.getElementById("nao");
-  const sim = document.getElementById("sim");
-  const painel = document.querySelector('.painel');
-  const painelWidth = painel.offsetWidth;
-  const naoWidth = nao.offsetWidth;
-
-  const maxX = painelWidth - naoWidth - 20;
-  const minX = 0;
-  let newX = Math.random() * maxX;
-  if (newX > sim.offsetLeft-10 && newX < sim.offsetLeft + sim.offsetWidth+10) newX = maxX - newX;
-  nao.style.left = newX + 'px';
+  const botaoNao = document.getElementById("nao");
+  const larguraJanela = window.innerWidth;
+  const alturaJanela = window.innerHeight;
+  const maxX = larguraJanela - botaoNao.offsetWidth;
+  const maxY = alturaJanela - botaoNao.offsetHeight;
+  botaoNao.style.position = 'fixed';
+  botaoNao.style.left = Math.floor(Math.random()*maxX)+'px';
+  botaoNao.style.top = Math.floor(Math.random()*maxY)+'px';
 }
 
-/* Chuva de corações contínua */
+/* Chuva de corações do conteúdo */
+const container = document.getElementById('chuva-coracoes');
 function criarCoracao() {
   const coracao = document.createElement('div');
   coracao.classList.add('coracao');
   coracao.style.left = Math.random()*window.innerWidth+'px';
   coracao.style.animationDuration = (4+Math.random()*3)+'s';
   coracao.style.transform = `scale(${0.5+Math.random()*0.7})`;
-  document.getElementById('chuva-coracoes').appendChild(coracao);
+  container.appendChild(coracao);
   setTimeout(()=>{coracao.remove();},7000);
 }
 setInterval(criarCoracao,300);
 </script>
-
 </body>
 </html>
