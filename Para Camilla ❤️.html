@@ -302,23 +302,22 @@ h2 {
 
   <p id="contador-amor"></p>
 
-  <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTQzejZ1MzR0eDZmeXdkeTZyOXF6eW1reWluNGRrbXVkdHkyb3Z4ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RGue8n5u0Ky5lrdWsy/giphy.gif" alt="">
+  <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExMW1xM2I4Znc0YzA1cDR4Z2wxOG0wZWFiMzZrd3l1YWlyaHB3c3Z1ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KHKU6noBjVKwomN9Aj/giphy.gif" alt="">
 
   <div class="gallery">
-    <img src="https://i.ibb.co/ccQPZmSY/05.jpg" alt="">
-    <img src="https://i.ibb.co/bjch0ccT/034.jpg" alt="">
-    <img src="https://i.ibb.co/nNWxBnVg/03.jpg" alt="">
-    <img src="https://i.ibb.co/jP2ckQh5/02.jpg" alt="">
-    <img src="https://i.ibb.co/QvwMphpz/01.jpg" alt="">
+    <img src="https://i.ibb.co/DcCtntM/01.jpg" alt="">
+    <img src="https://i.ibb.co/jkcY9MnJ/02.jpg" alt="">
+    <img src="https://i.ibb.co/DcCtntM/01.jpg" alt="">
+    <img src="https://i.ibb.co/jkcY9MnJ/02.jpg" alt="">
   </div>
 
   <h2>
-    Em meus olhos, você sempre será minha pessoa favorita... 
-    <strong>Te amo hoje, amanhã e sempre!</strong> 
-    Fica comigo a vida inteira?
+    Saiba que vou sentir muito a sua falta, e mesmo não conseguindo te ver pessoalmente, ainda tenho fé... 
+    <strong>Tenta não me esquecer!</strong>
+    No momento certo, me mandaria uma mensagem?
   </h2>
 
-  <a href="https://www.youtube.com/watch?v=oRvND-r57Us">
+  <a href="https://youtu.be/OzGyFyoJ25c?si=CWOMaQ75mMRrCIZi">
     <button id="sim">Sim!</button>
   </a>
   <button onmouseover="fuja()" id="nao">Não!</button>
@@ -388,30 +387,38 @@ function atualizarContador() {
   let minutos = agora.getMinutes() - dataInicio.getMinutes();
   let segundos = agora.getSeconds() - dataInicio.getSeconds();
 
-  if(segundos<0){ segundos+=60; minutos--; }
-  if(minutos<0){ minutos+=60; horas--; }
-  if(horas<0){ horas+=24; dias--; }
-  if(dias<0){ 
+  if (segundos < 0) { segundos += 60; minutos--; }
+  if (minutos < 0) { minutos += 60; horas--; }
+  if (horas < 0) { horas += 24; dias--; }
+  if (dias < 0) {
     const mesAnterior = new Date(agora.getFullYear(), agora.getMonth(), 0);
-    dias+= mesAnterior.getDate();
+    dias += mesAnterior.getDate();
     meses--;
   }
-  if(meses<0){ meses+=12; anos--; }
+  if (meses < 0) { meses += 12; anos--; }
 
   let partes = [];
-  if(anos>0) partes.push(plural(anos,'ano','anos'));
-  if(meses>0) partes.push(plural(meses,'mês','meses'));
-  if(dias>0) partes.push(plural(dias,'dia','dias'));
-  partes.push(plural(horas,'hora','horas'));
-  partes.push(plural(minutos,'minuto','minutos'));
-  partes.push(plural(segundos,'segundo','segundos'));
+  if (anos > 0) partes.push(plural(anos, 'ano', 'anos'));
+  if (meses > 0) partes.push(plural(meses, 'mês', 'meses'));
+  if (dias > 0) partes.push(plural(dias, 'dia', 'dias'));
+  partes.push(plural(horas, 'hora', 'horas'));
+  partes.push(plural(minutos, 'minuto', 'minutos'));
+  partes.push(plural(segundos, 'segundo', 'segundos'));
 
-  const options = { day:'numeric', month:'long', year:'numeric' };
+  // Aqui entra a correção: substitui a última vírgula por " e "
+  let textoTempo = partes.join(', ');
+  const ultimaVirgula = textoTempo.lastIndexOf(',');
+  if (ultimaVirgula !== -1) {
+    textoTempo = textoTempo.substring(0, ultimaVirgula) + ' e' + textoTempo.substring(ultimaVirgula + 1);
+  }
+
+  const options = { day: 'numeric', month: 'long', year: 'numeric' };
   const dataFormatada = agora.toLocaleDateString('pt-BR', options);
 
-  document.getElementById('contador-amor').innerHTML = 
-    `Hoje é dia <span class="destaque">${dataFormatada}</span> e estou a <span class="destaque">${partes.join(', ')}</span> apaixonado por você :)`;
+  document.getElementById('contador-amor').innerHTML =
+    `Hoje é dia <span class="destaque">${dataFormatada}</span> e nos conhecemos há <span class="destaque">${textoTempo}</span> :)`;
 }
+
 atualizarContador();
 setInterval(atualizarContador, 1000);
 
