@@ -201,35 +201,11 @@ h2 {
 }
 
 @media (max-width: 600px) {
-  .painel { 
-    padding-bottom: 50px; 
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
+  .painel { padding-bottom: 50px; margin-top: 10px; }
   .header h1 { font-size: 22px; }
   h2 { font-size: 13px; margin-top: 48px; margin-bottom: 8px; }
   #contador-amor { font-size: 12px; margin-bottom: 8px; }
-
-  /* Botões centralizados no mobile */
-  #botoes-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    position: relative;
-    margin-top: 20px;
-  }
-  #sim, #nao {
-    position: relative !important;
-    bottom: auto !important;
-    left: auto !important;
-    height: 34px; 
-    width: 58px; 
-    font-size: 11px; 
-  }
-
+  #sim, #nao { height: 34px; width: 58px; font-size: 11px; }
   .painel img { max-width: 80%; margin: 6px auto; }
   .rodape { font-size: 13px; padding: 7px 15px; margin-top: auto; }
   .gallery { width: 150px; margin-left: auto; margin-right: auto; gap: 5px; margin-bottom: 12px; }
@@ -341,13 +317,10 @@ h2 {
     No momento certo, me manda uma mensagem?
   </h2>
 
-  <!-- Container para centralizar botões no mobile -->
-  <div id="botoes-container">
-    <a href="https://youtu.be/OzGyFyoJ25c?si=CWOMaQ75mMRrCIZi">
-      <button id="sim">Sim!</button>
-    </a>
-    <button onmouseover="fuja()" id="nao">Não!</button>
-  </div>
+  <a href="https://youtu.be/OzGyFyoJ25c?si=CWOMaQ75mMRrCIZi">
+    <button id="sim">Sim!</button>
+  </a>
+  <button onmouseover="fuja()" id="nao">Não!</button>
 </div>
 
 <div class="rodape">
@@ -432,6 +405,7 @@ function atualizarContador() {
   partes.push(plural(minutos, 'minuto', 'minutos'));
   partes.push(plural(segundos, 'segundo', 'segundos'));
 
+  // Aqui entra a correção: substitui a última vírgula por " e "
   let textoTempo = partes.join(', ');
   const ultimaVirgula = textoTempo.lastIndexOf(',');
   if (ultimaVirgula !== -1) {
@@ -457,21 +431,33 @@ function posicionarBotoes() {
   const totalWidth = sim.offsetWidth + nao.offsetWidth + 15;
   const startX = (painelWidth - totalWidth)/2;
   sim.style.left = startX+'px';
-  nao.style.left = (startX + sim.offsetWidth + 15)+'px';
+  nao.style.left = (startX+sim.offsetWidth+15)+'px';
 }
-if(window.innerWidth > 600){ posicionarBotoes(); }
-window.addEventListener('resize', ()=>{ if(window.innerWidth > 600){ posicionarBotoes(); } });
-
+document.addEventListener('DOMContentLoaded', posicionarBotoes);
+window.addEventListener('resize', posicionarBotoes);
 function fuja() {
-  const nao = document.getElementById("nao");
-  const sim = document.getElementById("sim");
-  const painel = document.querySelector('.painel');
-  const painelWidth = painel.offsetWidth;
-  const maxLeft = painelWidth - nao.offsetWidth;
-  let novaPos;
-  do { novaPos = Math.random() * maxLeft; } while(Math.abs(novaPos - sim.offsetLeft) < 50);
-  nao.style.left = novaPos + "px";
+  const botaoNao = document.getElementById("nao");
+  const larguraJanela = window.innerWidth;
+  const alturaJanela = window.innerHeight;
+  const maxX = larguraJanela - botaoNao.offsetWidth;
+  const maxY = alturaJanela - botaoNao.offsetHeight;
+  botaoNao.style.position = 'fixed';
+  botaoNao.style.left = Math.floor(Math.random()*maxX)+'px';
+  botaoNao.style.top = Math.floor(Math.random()*maxY)+'px';
 }
+
+/* Chuva de corações do conteúdo */
+const container = document.getElementById('chuva-coracoes');
+function criarCoracao() {
+  const coracao = document.createElement('div');
+  coracao.classList.add('coracao');
+  coracao.style.left = Math.random()*window.innerWidth+'px';
+  coracao.style.animationDuration = (4+Math.random()*3)+'s';
+  coracao.style.transform = `scale(${0.5+Math.random()*0.7})`;
+  container.appendChild(coracao);
+  setTimeout(()=>{coracao.remove();},7000);
+}
+setInterval(criarCoracao,300);
 </script>
 </body>
 </html>
