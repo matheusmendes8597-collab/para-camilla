@@ -374,7 +374,7 @@ function criarCoracaoInicio() {
 setInterval(criarCoracaoInicio,300);
 
 /* Contador de amor com anos, meses, dias, horas, minutos e segundos */
-const dataInicio = new Date(2025, 8, 1); // 1 de setembro de 2025
+const dataInicio = new Date(2025, 09, 6); // 6 de outubro de 2025
 function plural(valor, singular, plural) { return `${valor} ${valor===1? singular: plural}`; }
 
 function atualizarContador() {
@@ -416,7 +416,7 @@ function atualizarContador() {
   const dataFormatada = agora.toLocaleDateString('pt-BR', options);
 
   document.getElementById('contador-amor').innerHTML =
-    `Hoje é dia <span class="destaque">${dataFormatada}</span> e nos conhecemos há <span class="destaque">${textoTempo}</span> :)`;
+    `Hoje é dia <span class="destaque">${dataFormatada}</span> e sinto sua falta há <span class="destaque">${textoTempo}</span> :)`;
 }
 
 atualizarContador();
