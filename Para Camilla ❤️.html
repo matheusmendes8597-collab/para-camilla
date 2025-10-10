@@ -311,14 +311,63 @@ h2 {
     <img src="https://i.ibb.co/jkcY9MnJ/02.jpg" alt="">
   </div>
 
-  <h2>
-    Saiba que vou sentir muito a sua falta, e mesmo não conseguindo te ver pessoalmente, ainda penso em você... 
-    <a href="https://youtu.be/vl2aELR5aQM?si=-1Vr2LvASdVoUrRi" target="_blank" style="text-decoration: underline; color: inherit; font-weight: bold;">
-      Tenta não me esquecer!
-    </a>
-    No momento certo, me manda uma mensagem?
-  </h2>
-  
+  <style>
+@keyframes piscarSuave {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+@keyframes balancoSeta {
+  0% { transform: translateX(0); opacity: 0.8; }
+  25% { transform: translateX(2px); opacity: 1; }
+  50% { transform: translateX(0); opacity: 0.8; }
+  75% { transform: translateX(-2px); opacity: 1; }
+  100% { transform: translateX(0); opacity: 0.8; }
+}
+
+.link-opacidade {
+  text-decoration: underline;
+  color: inherit;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  animation: piscarSuave 2.5s ease-in-out infinite;
+  cursor: pointer;
+}
+
+.seta {
+  display: inline-block;
+  font-size: 16px;
+  animation: balancoSeta 1.5s ease-in-out infinite;
+  color: inherit;
+}
+</style>
+
+<style>
+    @keyframes piscarSuave {
+      0% { opacity: 1; }
+      50% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+    .link-opacidade {
+      text-decoration: underline;
+      color: inherit;
+      font-weight: bold;
+      display: inline-block;
+      animation: piscarSuave 2.5s ease-in-out infinite;
+    }
+    </style>
+    
+    <h2>
+      Saiba que vou sentir muito a sua falta, e mesmo não conseguindo te ver pessoalmente, ainda penso em você... 
+      <a href="https://youtu.be/vl2aELR5aQM?si=-1Vr2LvASdVoUrRi" target="_blank" class="link-opacidade">
+        Tenta não me esquecer!
+      </a>
+      No momento certo, me manda uma mensagem?
+    </h2>
+    
 
   <a href="https://www.instagram.com/7matheuzz/">
     <button id="sim">Sim!</button>
